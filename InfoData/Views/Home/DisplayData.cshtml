@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DisplayData</title>
+    <script src="~/resource/jquery-3.4.1.min (1).js"></script>
+</head>
+<body>
+    <div> 
+        <table id="tblData">
+            <tr>
+                <th>Serial No</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Actions</th>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        $(function () {
+            $.get("/Home/GetData", {}, function (data) {
+                var row;
+                $.each(data, function (i,v) {
+                    row += "<tr><td>" + v.SerialNo + "</td><td>" + v.Name + "</td><td>" + v.Email + "</td><td>" + v.Address + "</td><td>" + v.City + "</td><td><a href='Updatedata?SN=" + v.SerialNo + "'>Update</a></td><td><a href='Delete_Record?SN=" + v.SerialNo + "'>Delete</a></td></tr>"
+                });
+
+                $("#tblData").append(row);
+            })
+        })
+    </script>
+</body>
+</html>
